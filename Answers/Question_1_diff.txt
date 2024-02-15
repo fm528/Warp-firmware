@@ -1,0 +1,84 @@
+diff --git a/src/boot/ksdk1.1.0/boot.c b/src/boot/ksdk1.1.0/boot.c
+index 53fe893..a7b845c 100644
+--- a/src/boot/ksdk1.1.0/boot.c
++++ b/src/boot/ksdk1.1.0/boot.c
+@@ -76,17 +76,19 @@
+ /*
+ * Include all sensors because they will be needed to decode flash.
+ */
+-#include "devADXL362.h"
+-#include "devAMG8834.h"
+-#include "devMMA8451Q.h"
+-#include "devMAG3110.h"
+-#include "devL3GD20H.h"
+-#include "devBME680.h"
+-#include "devBMX055.h"
+-#include "devCCS811.h"
+-#include "devHDC1000.h"
+-#include "devRV8803C7.h"
+ 
++#if (!WARP_BUILD_ENABLE_FRDMKL03)
++	#include "devADXL362.h"
++	#include "devAMG8834.h"
++	#include "devMAG3110.h"
++	#include "devL3GD20H.h"
++	#include "devBME680.h"
++	#include "devBMX055.h"
++	#include "devCCS811.h"
++	#include "devHDC1000.h"
++	#include "devRV8803C7.h"
++#endif
++#include "devMMA8451Q.h"
+ 
+ #if (WARP_BUILD_ENABLE_DEVADXL362)
+ 	volatile WarpSPIDeviceState			deviceADXL362State;
+@@ -1674,7 +1676,7 @@ main(void)
+ #endif
+ 
+ #if (WARP_BUILD_ENABLE_DEVMMA8451Q)
+-		initMMA8451Q(	0x1C	/* i2cAddress */,	kWarpDefaultSupplyVoltageMillivoltsMMA8451Q	);
++		initMMA8451Q(	0x1D	/* i2cAddress */,	kWarpDefaultSupplyVoltageMillivoltsMMA8451Q	);
+ #endif
+ 
+ #if (WARP_BUILD_ENABLE_DEVLPS25H)
+@@ -5035,4 +5037,4 @@ flashDecodeSensorBitField(uint16_t sensorBitField, uint8_t sensorIndex, uint8_t*
+ 		}
+ 	}
+ }
+-#endif
+\ No newline at end of file
++#endif
+diff --git a/src/boot/ksdk1.1.0/gpio_pins.h b/src/boot/ksdk1.1.0/gpio_pins.h
+index 3c76bfd..ced184f 100644
+--- a/src/boot/ksdk1.1.0/gpio_pins.h
++++ b/src/boot/ksdk1.1.0/gpio_pins.h
+@@ -81,9 +81,9 @@ enum _gpio_pins
+ 		kWarpPinUnusedPTB11			= GPIO_MAKE_PIN(HW_GPIOB, 11),
+ 		kWarpPinUnusedPTB13			= GPIO_MAKE_PIN(HW_GPIOB, 13),
+ 
+-		kWarpPinUnusedPTA0			= GPIO_MAKE_PIN(HW_GPIOA, 0),
+-		kWarpPinUnusedPTA1			= GPIO_MAKE_PIN(HW_GPIOA, 1),
+-		kWarpPinUnusedPTA2			= GPIO_MAKE_PIN(HW_GPIOA, 2),
++//		kWarpPinUnusedPTA0			= GPIO_MAKE_PIN(HW_GPIOA, 0),
++//		kWarpPinUnusedPTA1			= GPIO_MAKE_PIN(HW_GPIOA, 1),
++//		kWarpPinUnusedPTA2			= GPIO_MAKE_PIN(HW_GPIOA, 2),
+ 		kWarpPinUnusedPTA3			= GPIO_MAKE_PIN(HW_GPIOA, 3),
+ 		kWarpPinUnusedPTA4			= GPIO_MAKE_PIN(HW_GPIOA, 4),
+ 		kWarpPinUnusedPTA5			= GPIO_MAKE_PIN(HW_GPIOA, 5),
+diff --git a/src/boot/ksdk1.1.0/powermodes.c b/src/boot/ksdk1.1.0/powermodes.c
+index 3dd5d6a..922803a 100644
+--- a/src/boot/ksdk1.1.0/powermodes.c
++++ b/src/boot/ksdk1.1.0/powermodes.c
+@@ -18,9 +18,10 @@
+ #include "glaux.h"
+ #include "warp.h"
+ #include "gpio_pins.h"
+-#include "devRV8803C7.h"
+-
+ 
++#if (WARP_BUILD_ENABLE_DEVRV8803C7)
++	#include "devRV8803C7.h"
++#endif
+ 
+ /*
+  *	From KSDK power_manager_demo.c BEGIN>>>
