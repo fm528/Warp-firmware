@@ -1,0 +1,358 @@
+Script started on 2024-02-15 14:25:43+00:00 [TERM="xterm-256color" TTY="/dev/pts/1" COLUMNS="204" LINES="55"]
+[?2004h]0;francis_mcmullan@Coursework: ~/Documents/Coursework_2/Warp-Firmware[01;32mfrancis_mcmullan@Coursework[00m:[01;34m~/Documents/Coursework_2/Warp-Firmware[00m$ git push[Kscript --help
+[?2004l
+Usage:
+ script [options] [file]
+
+Make a typescript of a terminal session.
+
+Options:
+ -I, --log-in <file>           log stdin to file
+ -O, --log-out <file>          log stdout to file (default)
+ -B, --log-io <file>           log stdin and stdout to file
+
+ -T, --log-timing <file>       log timing information to file
+ -t[<file>], --timing[=<file>] deprecated alias to -T (default file is stderr)
+ -m, --logging-format <name>   force to 'classic' or 'advanced' format
+
+ -a, --append                  append to the log file
+ -c, --command <command>       run command rather than interactive shell
+ -e, --return                  return exit code of the child process
+ -f, --flush                   run flush after each write
+     --force                   use output file even when it is a link
+ -E, --echo <when>             echo input in session (auto, always or never)
+ -o, --output-limit <size>     terminate if output files exceed size
+ -q, --quiet                   be quiet
+
+ -h, --help                    display this help
+ -V, --version                 display version
+
+For more details, see script(1).
+[?2004h]0;francis_mcmullan@Coursework: ~/Documents/Coursework_2/Warp-Firmware[01;32mfrancis_mcmullan@Coursework[00m:[01;34m~/Documents/Coursework_2/Warp-Firmware[00m$ script --help[5Pgit push-credential-manager github login push[Kscript --help[Knano 
+Answers/          build-kl05.sh     doc/              .github/          .gitmodules       MAINTAINERS.txt   README.md         src/              typescript        
+build/            CONTRIBUTORS.txt  .git/             .gitignore        LICENSE.txt       Makefile          setup.conf        tools/            
+]0;francis_mcmullan@Coursework: ~/Documents/Coursework_2/Warp-Firmware[01;32mfrancis_mcmullan@Coursework[00m:[01;34m~/Documents/Coursework_2/Warp-Firmware[00m$ nano Answers/
+Commandline.txt      Question_1_diff.txt  Question_7_diff.txt  Warp.map             
+]0;francis_mcmullan@Coursework: ~/Documents/Coursework_2/Warp-Firmware[01;32mfrancis_mcmullan@Coursework[00m:[01;34m~/Documents/Coursework_2/Warp-Firmware[00m$ nano Answers/Commandline.txt 
+[?2004l[?2004h[?1049h[22;0;0t[1;55r(B[m[4l[?7h[39;49m[?1h=[?1h=[?25l[39;49m(B[m[H[2J[53;96H(B[0;7m[ Reading... ](B[m[53;94H(B[0;7m[ Read 66 lines ](B[m[H(B[0;7m  GNU nano 6.2                                                                               Answers/Commandline.txt                                                                                        [1;203H(B[m[54d(B[0;7m^G(B[m Help[54;18H(B[0;7m^O(B[m Write Out     (B[0;7m^W(B[m Where Is[52G(B[0;7m^K(B[m Cut[54;69H(B[0;7m^T(B[m Execute[86G(B[0;7m^C(B[m Location[103G(B[0;7mM-U(B[m Undo[54;120H(B[0;7mM-A(B[m Set Mark     (B[0;7mM-](B[m To Bracket   (B[0;7mM-Q(B[m Previous     (B[0;7m^B(B[m Back[54;188H(B[0;7m^◂(B[m Prev Word[55d(B[0;7m^X(B[m Exit[55;18H(B[0;7m^R(B[m Read File     (B[0;7m^\(B[m Replace[52G(B[0;7m^U(B[m Paste[55;69H(B[0;7m^J(B[m Justify[86G(B[0;7m^/(B[m Go To Line    (B[0;7mM-E(B[m Redo[55;120H(B[0;7mM-6(B[m Copy[55;137H(B[0;7m^Q(B[m Where Was     (B[0;7mM-W(B[m Next[55;171H(B[0;7m^F(B[m Forwards[188G(B[0;7m^▸(B[m Next Word[2dScript started on 2024-02-15 14:25:14+00:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="204" LINES="55"][3d[38;5;208m^[[39m(B[m[?2004h[38;5;208m^[[39m(B[m]0;francis_mcmullan@Coursework: ~/Documents/Coursework_2/Warp-Firmware[38;5;208m^G^[[39m(B[m[01;32mfrancis_mcmullan@Coursework[38;5;208m^[[39m(B[m[00m:[38;5;208m^[[39m(B[m[01;34m~/Documents/Coursework_2/Warp-Firmware[38;5;208m^[[39m(B[m[00m$ make frdmkl03[4d[38;5;208m^[[39m(B[m[?2004l[38;5;208m^M[39m(B[mmkdir -p build/ksdk1.1/work[5dmkdir -p build/ksdk1.1/work/boards/Warp[6dmkdir -p build/ksdk1.1/work/demos/Warp/src[7dmkdir -p build/ksdk1.1/work/demos/Warp/armgcc/Warp[8dcp -r tools/sdk/ksdk1.1.0/*[38;5;208m[37X[8;65H[39m(B[mbuild/ksdk1.1/work[9dcp src/boot/ksdk1.1.0/SEGGER*[38;5;208m[35X[9;65H[39m(B[mbuild/ksdk1.1/work/demos/Warp/src/[10dcp src/boot/ksdk1.1.0/config.h[38;5;208m[34X[10;65H[39m(B[mbuild/ksdk1.1/work/demos/Warp/src/[11dcp src/boot/ksdk1.1.0/boot.c[38;5;208m[36X[11;65H[39m(B[mbuild/ksdk1.1/work/demos/Warp/src/[12dcp src/boot/ksdk1.1.0/errstrs*[38;5;208m[34X[12;65H[39m(B[mbuild/ksdk1.1/work/demos/Warp/src/[13dcp src/boot/ksdk1.1.0/powermodes.c[38;5;208m[30X[13;65H[39m(B[mbuild/ksdk1.1/work/demos/Warp/src/[14dcp src/boot/ksdk1.1.0/warp.h[38;5;208m[36X[14;65H[39m(B[mbuild/ksdk1.1/work/demos/Warp/src/[15dcp src/boot/ksdk1.1.0/startup_MKL03Z4.S[38;5;208m[25X[15;65H[39m(B[mbuild/ksdk1.1/work/platform/startup/MKL03Z4/gcc/startup_MKL03Z4.S[16dcp src/boot/ksdk1.1.0/gpio_pins.c[38;5;208m[31X[16;65H[39m(B[mbuild/ksdk1.1/work/boards/Warp[17dcp src/boot/ksdk1.1.0/gpio_pins.h[38;5;208m[31X[17;65H[39m(B[mbuild/ksdk1.1/work/boards/Warp[18dcp src/boot/ksdk1.1.0/config.h[38;5;208m[34X[18;65H[39m(B[mbuild/ksdk1.1/work/boards/Warp[19dcp src/boot/ksdk1.1.0/glaux.h[38;5;208m[35X[19;65H[39m(B[mbuild/ksdk1.1/work/boards/Warp[20dcp src/boot/ksdk1.1.0/CMakeLists-FRDMKL03.txt[38;5;208m[19X[20;65H[39m(B[mbuild/ksdk1.1/work/demos/Warp/armgcc/Warp/CMakeLists.txt[21dcp src/boot/ksdk1.1.0/devMMA8451Q.*[38;5;208m[29X[21;65H[39m(B[mbuild/ksdk1.1/work/demos/Warp/src/[22dcp src/boot/ksdk1.1.0/devSSD1331.*[38;5;208m[30X[22;65H[39m(B[mbuild/ksdk1.1/work/demos/Warp/src/[23dcd build/ksdk1.1/work/lib/ksdk_platform_lib/armgcc/KL03Z4 && ./clean.sh; ./build_release.sh[24d[38;5;208m^[[39m(B[m[33mCMake Warning (dev) in CMakeLists.txt:[25;3HNo project() command is present.  The top-level CMakeLists.txt file must[26;3Hcontain a literal, direct call to the project() command.  Add a line of[27;3Hcode such as[29;5Hproject(ProjectName)[31;3Hnear the top of the file, but after cmake_minimum_required().[33;3HCMake is pretending there is a "project(Project)" command on the first[34;3Hline.[35dThis warning is for project developers.  Use -Wno-dev to suppress it.[36d[38;5;208m^[[39m(B[m[0m[37d[38;5;208m^[[39m(B[m[31mCMake Error at /home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/tools/cmake_toolchain_files/armgcc.cmake:23 (MESSAGE):[38;3H***Please set ARMGCC_DIR in envionment variables***[39dCall Stack (most recent call first):[40;3H/usr/share/cmake-3.22/Modules/CMakeDetermineSystem.cmake:121 (include)[41;3HCMakeLists.txt[43d[38;5;208m^[[39m(B[m[0m[44d[38;5;208m^[[39m(B[m[0mCMake Error: CMake was unable to find a build program corresponding to "Unix Makefiles".  CMAKE_MAKE_PROGRAM is not set.  You probably need to select a different build tool.[38;5;208m^[[39m(B[m[0m[45d[38;5;208m^[[39m(B[m[0mCMake Error: CMAKE_C_COMPILER not set, after EnableLanguage[38;5;208m^[[39m(B[m[0m[46d[38;5;208m^[[39m(B[m[0mCMake Error: CMAKE_CXX_COMPILER not set, after EnableLanguage[38;5;208m^[[39m(B[m[0m[47d-- Configuring incomplete, errors occurred![48dmake[1]: Entering directory '/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/lib/ksdk_platform_lib/armgcc/KL03Z4'[49dmake[1]: *** No targets specified and no makefile found. Stop.[50dmake[1]: Leaving directory '/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/lib/ksdk_platform_lib/armgcc/KL03Z4'[51dmake: *** [Makefile:103: frdmkl03] Error 2[52d[38;5;208m^[[39m(B[m[?2004h[38;5;208m^[[39m(B[m]0;francis_mcmullan@Coursework: ~/Documents/Coursework_2/Warp-Firmware[38;5;208m^G^[[39m(B[m[01;32mfrancis_mcmullan@Coursework[38;5;208m^[[39m(B[m[00m:[38;5;208m^[[39m(B[m[01;34m~/Documents/Coursework_2/Warp-Firmware[38;5;208m^[[39m(B[m[00m$ make frdmkl03[38;5;208m^H^H^H^H^[39m(B[0;7m>[2;1H(B[m[?12l[?25h[?25l[?12l[?25h[8d[?25l[?12l[?25h[14d[?25l[?12l[?25h[20d[?25l[53d[K[?12l[?25h[26d[?25l[?12l[?25h[32d[?25l[?12l[?25h[36d[?25l[?12l[?25h[38d[?25l[?12l[?25h[44d[?25l[?12l[?25h[50d[?25l[?12l[?25h[2;53r[53;1H[4S[1;55r[49;1H[38;5;208m^[[39m(B[m[?2004l[38;5;208m^M[39m(B[mScript started, output log file is 'typescript'.[50d[38;5;208m^[[39m(B[m[?2004h[38;5;208m^[[39m(B[m]0;francis_mcmullan@Coursework: ~/Documents/Coursework_2/Warp-Firmware[38;5;208m^G^[[39m(B[m[01;32mfrancis_mcmullan@Coursework[38;5;208m^[[39m(B[m[00m:[38;5;208m^[[39m(B[m[01;34m~/Documents/Coursework_2/Warp-Firmware[38;5;208m^[[39m(B[m[00m$ git push[38;5;208m^H^H^H^H^H^H^H[39m(B[0;7m>[51;1H(B[0m[38;5;208m^[[39m(B[m[?2004l[38;5;208m^M[52d[39m(B[mUsage:[?25l[?12l[?25h7[2;53r8[53d
+[1;55r[52;2Hscript [options] [file][?25l[?12l[?25h7[2;53r8[53d[5S[1;55r[49;1HMake a typescript of a terminal session.[51dOptions:[52d -I, --log-in <file>[52;32Hlog stdin to file[?25l[?12l[?25h7[2;53r8[53d[6S[1;55r[47;2H-O, --log-out <file>[47;32Hlog stdout to file (default)[48d -B, --log-io <file>[48;32Hlog stdin and stdout to file[50d -T, --log-timing <file>[32Glog timing information to file[51d -t[<file>], --ti[52d[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[54d[J[55d[?12l[?25h[55;1H[?1049l[23;0;0t[?1l>[?2004l[?2004h]0;francis_mcmullan@Coursework: ~/Documents/Coursework_2/Warp-Firmware[01;32mfrancis_mcmullan@Coursework[00m:[01;34m~/Documents/Coursework_2/Warp-Firmware[00m$ nano Answers/Commandline.txt [16Pscript --help[5Pgit push-credential-manager github login[2Pexport GCM_CREDENTIAL_STORE=cachegit-credential-manager github login push[K-credential-manager github login[2Pexport GCM_CREDENTIAL_STORE=cachegit-credential-manager github login[2Pexport GCM_CREDENTIAL_STORE=cachegit-credential-manager github login[K[1Pstore--helpcm --help[K[2Pit pushcommit -m "adding answers"status[K[1Padd *cp build/ksdk1.1/work/demos/Warp/armgcc/Warp/release/Warp.map Answers/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cgit status[K[1Padd *statusls Answers[Kmv ../Answers/ ../Warp-Firmware/git push[Kstatusmerge Working-Branch[5Pcheckout master[5@merge -s ours[C[C[C[C[C[C[Ccheckout Working-Branchstatus[Kmerge --abortcancelcheckout Working-Branchdiff[Kmerge Working-Branch --help[K[7Pswitch master[7Ptatusmerge --help[2Phelp[6Ppushcommit -m "Question 7"add *[Kcommit -m "Question 7"diff > ../Answers/Question_7_diff.txt[Kmake load-warp[1Pfrdmkl03nano src/boot/ksdk1.1.0/boot.c [18Pmake frdmkl03git diff > ../Answers/Question_7_diff.txt[Kcp ../Warp-firmware/tools/scripts/warp.jlink.commands tools/scripts/[22PMakefile ../Warp-Firmware/[30Pnano setup.conf ls[Kcp ../Warp-firmware/setup.conf ../Warp-Firmware/[Kgit diff[Kcp ../Warp-firmware/src/boot/ksdk1.1.0/gpio_pins.* src/boot/ksdk1.1.0/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[2Pnano +96 ../Warp-firmware/src/boot/ksdk1.1.0/CMakeLists-FRDMKL03.txtgit diff[Kcp ../Warp-firmware/src/boot/ksdk1.1.0/CMakeLists-FRDMKL03.txt src/boot/ksdk1.1.0/[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kexport ARMGCC_DIR=/bu[Kin
+[?2004l[?2004h]0;francis_mcmullan@Coursework: ~/Documents/Coursework_2/Warp-Firmware[01;32mfrancis_mcmullan@Coursework[00m:[01;34m~/Documents/Coursework_2/Warp-Firmware[00m$ script Answers/Commandline.txt 
+[?2004lScript started, output log file is 'Answers/Commandline.txt'.
+[?2004h]0;francis_mcmullan@Coursework: ~/Documents/Coursework_2/Warp-Firmware[01;32mfrancis_mcmullan@Coursework[00m:[01;34m~/Documents/Coursework_2/Warp-Firmware[00m$ make frdmkl03
+[?2004lmkdir -p build/ksdk1.1/work
+mkdir -p build/ksdk1.1/work/boards/Warp
+mkdir -p build/ksdk1.1/work/demos/Warp/src
+mkdir -p build/ksdk1.1/work/demos/Warp/armgcc/Warp
+cp -r tools/sdk/ksdk1.1.0/*					build/ksdk1.1/work
+cp src/boot/ksdk1.1.0/SEGGER*					build/ksdk1.1/work/demos/Warp/src/
+cp src/boot/ksdk1.1.0/config.h					build/ksdk1.1/work/demos/Warp/src/
+cp src/boot/ksdk1.1.0/boot.c					build/ksdk1.1/work/demos/Warp/src/
+cp src/boot/ksdk1.1.0/errstrs*					build/ksdk1.1/work/demos/Warp/src/
+cp src/boot/ksdk1.1.0/powermodes.c				build/ksdk1.1/work/demos/Warp/src/
+cp src/boot/ksdk1.1.0/warp.h					build/ksdk1.1/work/demos/Warp/src/
+cp src/boot/ksdk1.1.0/startup_MKL03Z4.S				build/ksdk1.1/work/platform/startup/MKL03Z4/gcc/startup_MKL03Z4.S
+cp src/boot/ksdk1.1.0/gpio_pins.c				build/ksdk1.1/work/boards/Warp
+cp src/boot/ksdk1.1.0/gpio_pins.h				build/ksdk1.1/work/boards/Warp
+cp src/boot/ksdk1.1.0/config.h					build/ksdk1.1/work/boards/Warp
+cp src/boot/ksdk1.1.0/glaux.h					build/ksdk1.1/work/boards/Warp
+cp src/boot/ksdk1.1.0/CMakeLists-FRDMKL03.txt			build/ksdk1.1/work/demos/Warp/armgcc/Warp/CMakeLists.txt
+cp src/boot/ksdk1.1.0/devMMA8451Q.*				build/ksdk1.1/work/demos/Warp/src/
+cp src/boot/ksdk1.1.0/devSSD1331.*				build/ksdk1.1/work/demos/Warp/src/
+cd build/ksdk1.1/work/lib/ksdk_platform_lib/armgcc/KL03Z4 && ./clean.sh; ./build_release.sh
+[33mCMake Warning (dev) in CMakeLists.txt:
+  No project() command is present.  The top-level CMakeLists.txt file must
+  contain a literal, direct call to the project() command.  Add a line of
+  code such as
+
+    project(ProjectName)
+
+  near the top of the file, but after cmake_minimum_required().
+
+  CMake is pretending there is a "project(Project)" command on the first
+  line.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+[0m
+-- TOOLCHAIN_DIR: /usr/
+[0mCMake Deprecation Warning at /usr/share/cmake-3.22/Modules/CMakeForceCompiler.cmake:75 (message):
+  The CMAKE_FORCE_C_COMPILER macro is deprecated.  Instead just set
+  CMAKE_C_COMPILER and allow CMake to identify the compiler.
+Call Stack (most recent call first):
+  /home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/tools/cmake_toolchain_files/armgcc.cmake:38 (CMAKE_FORCE_C_COMPILER)
+  /usr/share/cmake-3.22/Modules/CMakeDetermineSystem.cmake:121 (include)
+  CMakeLists.txt
+
+[0m
+[0mCMake Deprecation Warning at /usr/share/cmake-3.22/Modules/CMakeForceCompiler.cmake:89 (message):
+  The CMAKE_FORCE_CXX_COMPILER macro is deprecated.  Instead just set
+  CMAKE_CXX_COMPILER and allow CMake to identify the compiler.
+Call Stack (most recent call first):
+  /home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/tools/cmake_toolchain_files/armgcc.cmake:39 (CMAKE_FORCE_CXX_COMPILER)
+  /usr/share/cmake-3.22/Modules/CMakeDetermineSystem.cmake:121 (include)
+  CMakeLists.txt
+
+[0m
+-- BUILD_TYPE: Release
+-- TOOLCHAIN_DIR: /usr/
+[0mCMake Deprecation Warning at /usr/share/cmake-3.22/Modules/CMakeForceCompiler.cmake:75 (message):
+  The CMAKE_FORCE_C_COMPILER macro is deprecated.  Instead just set
+  CMAKE_C_COMPILER and allow CMake to identify the compiler.
+Call Stack (most recent call first):
+  /home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/tools/cmake_toolchain_files/armgcc.cmake:38 (CMAKE_FORCE_C_COMPILER)
+  CMakeFiles/3.22.1/CMakeSystem.cmake:6 (include)
+  CMakeLists.txt
+
+[0m
+[0mCMake Deprecation Warning at /usr/share/cmake-3.22/Modules/CMakeForceCompiler.cmake:89 (message):
+  The CMAKE_FORCE_CXX_COMPILER macro is deprecated.  Instead just set
+  CMAKE_CXX_COMPILER and allow CMake to identify the compiler.
+Call Stack (most recent call first):
+  /home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/tools/cmake_toolchain_files/armgcc.cmake:39 (CMAKE_FORCE_CXX_COMPILER)
+  CMakeFiles/3.22.1/CMakeSystem.cmake:6 (include)
+  CMakeLists.txt
+
+[0m
+-- BUILD_TYPE: Release
+[0mCMake Deprecation Warning at CMakeLists.txt:5 (CMAKE_MINIMUM_REQUIRED):
+  Compatibility with CMake < 2.8.12 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+[0m
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr//bin/arm-none-eabi-gcc
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/lib/ksdk_platform_lib/armgcc/KL03Z4
+make[1]: Entering directory '/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/lib/ksdk_platform_lib/armgcc/KL03Z4'
+make[2]: Entering directory '/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/lib/ksdk_platform_lib/armgcc/KL03Z4'
+make[3]: Entering directory '/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/lib/ksdk_platform_lib/armgcc/KL03Z4'
+make[3]: Leaving directory '/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/lib/ksdk_platform_lib/armgcc/KL03Z4'
+make[3]: Entering directory '/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/lib/ksdk_platform_lib/armgcc/KL03Z4'
+[  1%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/osa/src/fsl_os_abstraction_bm.c.obj[0m
+[  3%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/system/src/clock/fsl_clock_manager.c.obj[0m
+[  5%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/system/src/clock/MKL03Z4/fsl_clock_MKL03Z4.c.obj[0m
+[  7%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/system/src/clock/fsl_clock_manager_common.c.obj[0m
+[  9%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/system/src/interrupt/fsl_interrupt_manager.c.obj[0m
+[ 11%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/system/src/hwtimer/fsl_hwtimer.c.obj[0m
+[ 13%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/system/src/hwtimer/fsl_hwtimer_systick.c.obj[0m
+[ 15%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/system/src/power/fsl_power_manager.c.obj[0m
+[ 17%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/hal/src/adc16/fsl_adc16_hal.c.obj[0m
+[ 19%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/adc16/fsl_adc16_common.c.obj[0m
+[ 21%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/adc16/fsl_adc16_driver.c.obj[0m
+[ 23%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/hal/src/cmp/fsl_cmp_hal.c.obj[0m
+[ 25%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/cmp/fsl_cmp_driver.c.obj[0m
+[ 26%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/cmp/fsl_cmp_common.c.obj[0m
+[ 28%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/hal/src/cop/fsl_cop_hal.c.obj[0m
+[ 30%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/cop/fsl_cop_driver.c.obj[0m
+[ 32%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/hal/src/gpio/fsl_gpio_hal.c.obj[0m
+[ 34%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/cop/fsl_cop_common.c.obj[0m
+[ 36%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/gpio/fsl_gpio_common.c.obj[0m
+[ 38%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/gpio/fsl_gpio_driver.c.obj[0m
+[ 40%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/i2c/fsl_i2c_shared_function.c.obj[0m
+[ 42%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/hal/src/i2c/fsl_i2c_hal.c.obj[0m
+[ 44%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/i2c/fsl_i2c_common.c.obj[0m
+[ 46%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/i2c/fsl_i2c_master_driver.c.obj[0m
+[ 48%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/i2c/fsl_i2c_slave_driver.c.obj[0m
+[ 50%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/hal/src/llwu/fsl_llwu_hal.c.obj[0m
+[ 51%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/hal/src/lptmr/fsl_lptmr_hal.c.obj[0m
+[ 53%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/lptmr/fsl_lptmr_driver.c.obj[0m
+[ 55%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/lptmr/fsl_lptmr_common.c.obj[0m
+[ 57%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/hal/src/lpuart/fsl_lpuart_hal.c.obj[0m
+[ 59%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/lpuart/fsl_lpuart_driver.c.obj[0m
+[ 61%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/lpuart/fsl_lpuart_common.c.obj[0m
+[ 63%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/hal/src/mcglite/fsl_mcglite_hal.c.obj[0m
+[ 65%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/hal/src/mcglite/fsl_mcglite_hal_modes.c.obj[0m
+[ 67%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/hal/src/osc/fsl_osc_hal.c.obj[0m
+[ 69%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/hal/src/port/fsl_port_hal.c.obj[0m
+[ 71%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/hal/src/rtc/fsl_rtc_hal.c.obj[0m
+[ 73%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/rtc/fsl_rtc_driver.c.obj[0m
+[ 75%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/rtc/fsl_rtc_common.c.obj[0m
+[ 76%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/hal/src/sim/MKL03Z4/fsl_sim_hal_MKL03Z4.c.obj[0m
+[ 78%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/hal/src/spi/fsl_spi_hal.c.obj[0m
+[ 80%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/spi/fsl_spi_shared_function.c.obj[0m
+[ 82%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/spi/fsl_spi_master_driver.c.obj[0m
+[ 84%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/spi/fsl_spi_slave_driver.c.obj[0m
+[ 86%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/spi/fsl_spi_common.c.obj[0m
+[ 88%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/hal/src/smc/fsl_smc_hal.c.obj[0m
+[ 90%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/hal/src/pmc/fsl_pmc_hal.c.obj[0m
+[ 92%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/hal/src/rcm/fsl_rcm_hal.c.obj[0m
+[ 94%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/hal/src/tpm/fsl_tpm_hal.c.obj[0m
+[ 96%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/tpm/fsl_tpm_common.c.obj[0m
+[ 98%] [32mBuilding C object CMakeFiles/KsdkPlatformLib.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/tpm/fsl_tpm_driver.c.obj[0m
+[100%] [32m[1mLinking C static library release/libksdk_platform.a[0m
+make[3]: Leaving directory '/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/lib/ksdk_platform_lib/armgcc/KL03Z4'
+[100%] Built target KsdkPlatformLib
+make[2]: Leaving directory '/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/lib/ksdk_platform_lib/armgcc/KL03Z4'
+make[1]: Leaving directory '/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/lib/ksdk_platform_lib/armgcc/KL03Z4'
+cd build/ksdk1.1/work/demos/Warp/armgcc/Warp && ./clean.sh; ./build_release.sh
+[33mCMake Warning (dev) in CMakeLists.txt:
+  No project() command is present.  The top-level CMakeLists.txt file must
+  contain a literal, direct call to the project() command.  Add a line of
+  code such as
+
+    project(ProjectName)
+
+  near the top of the file, but after cmake_minimum_required().
+
+  CMake is pretending there is a "project(Project)" command on the first
+  line.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+[0m
+-- TOOLCHAIN_DIR: /usr/
+[0mCMake Deprecation Warning at /usr/share/cmake-3.22/Modules/CMakeForceCompiler.cmake:75 (message):
+  The CMAKE_FORCE_C_COMPILER macro is deprecated.  Instead just set
+  CMAKE_C_COMPILER and allow CMake to identify the compiler.
+Call Stack (most recent call first):
+  /home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/tools/cmake_toolchain_files/armgcc.cmake:38 (CMAKE_FORCE_C_COMPILER)
+  /usr/share/cmake-3.22/Modules/CMakeDetermineSystem.cmake:121 (include)
+  CMakeLists.txt
+
+[0m
+[0mCMake Deprecation Warning at /usr/share/cmake-3.22/Modules/CMakeForceCompiler.cmake:89 (message):
+  The CMAKE_FORCE_CXX_COMPILER macro is deprecated.  Instead just set
+  CMAKE_CXX_COMPILER and allow CMake to identify the compiler.
+Call Stack (most recent call first):
+  /home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/tools/cmake_toolchain_files/armgcc.cmake:39 (CMAKE_FORCE_CXX_COMPILER)
+  /usr/share/cmake-3.22/Modules/CMakeDetermineSystem.cmake:121 (include)
+  CMakeLists.txt
+
+[0m
+-- BUILD_TYPE: Release
+-- TOOLCHAIN_DIR: /usr/
+[0mCMake Deprecation Warning at /usr/share/cmake-3.22/Modules/CMakeForceCompiler.cmake:75 (message):
+  The CMAKE_FORCE_C_COMPILER macro is deprecated.  Instead just set
+  CMAKE_C_COMPILER and allow CMake to identify the compiler.
+Call Stack (most recent call first):
+  /home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/tools/cmake_toolchain_files/armgcc.cmake:38 (CMAKE_FORCE_C_COMPILER)
+  CMakeFiles/3.22.1/CMakeSystem.cmake:6 (include)
+  CMakeLists.txt
+
+[0m
+[0mCMake Deprecation Warning at /usr/share/cmake-3.22/Modules/CMakeForceCompiler.cmake:89 (message):
+  The CMAKE_FORCE_CXX_COMPILER macro is deprecated.  Instead just set
+  CMAKE_CXX_COMPILER and allow CMake to identify the compiler.
+Call Stack (most recent call first):
+  /home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/tools/cmake_toolchain_files/armgcc.cmake:39 (CMAKE_FORCE_CXX_COMPILER)
+  CMakeFiles/3.22.1/CMakeSystem.cmake:6 (include)
+  CMakeLists.txt
+
+[0m
+-- BUILD_TYPE: Release
+[0mCMake Deprecation Warning at CMakeLists.txt:5 (CMAKE_MINIMUM_REQUIRED):
+  Compatibility with CMake < 2.8.12 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+[0m
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr//bin/arm-none-eabi-gcc
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/demos/Warp/armgcc/Warp
+make[1]: Entering directory '/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/demos/Warp/armgcc/Warp'
+make[2]: Entering directory '/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/demos/Warp/armgcc/Warp'
+make[3]: Entering directory '/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/demos/Warp/armgcc/Warp'
+[35m[1mScanning dependencies of target Warp[0m
+make[3]: Leaving directory '/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/demos/Warp/armgcc/Warp'
+make[3]: Entering directory '/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/demos/Warp/armgcc/Warp'
+[  6%] [32mBuilding ASM object CMakeFiles/Warp.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/startup/MKL03Z4/gcc/startup_MKL03Z4.S.obj[0m
+[ 12%] [32mBuilding C object CMakeFiles/Warp.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/demos/Warp/src/errstrsEN.c.obj[0m
+[ 18%] [32mBuilding C object CMakeFiles/Warp.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/utilities/src/fsl_misc_utilities.c.obj[0m
+[ 25%] [32mBuilding C object CMakeFiles/Warp.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/demos/Warp/src/boot.c.obj[0m
+[ 31%] [32mBuilding C object CMakeFiles/Warp.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/demos/Warp/src/powermodes.c.obj[0m
+[ 37%] [32mBuilding C object CMakeFiles/Warp.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/demos/Warp/src/devMMA8451Q.c.obj[0m
+[ 43%] [32mBuilding C object CMakeFiles/Warp.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/demos/Warp/src/devSSD1331.c.obj[0m
+[01m[K/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/demos/Warp/src/boot.c:[m[K In function '[01m[KprintAllSensors[m[K':
+[01m[K/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/demos/Warp/src/boot.c:3435:11:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[KtimeAtStart[m[K' [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+ 3435 |  uint32_t [01;35m[KtimeAtStart[m[K = OSA_TimeGetMsec();
+      |           [01;35m[K^~~~~~~~~~~[m[K
+[01m[K/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/demos/Warp/src/boot.c:[m[K In function '[01m[KactivateAllLowPowerSensorModes[m[K':
+[01m[K/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/demos/Warp/src/boot.c:4442:13:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Kstatus[m[K' [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+ 4442 |  WarpStatus [01;35m[Kstatus[m[K;
+      |             [01;35m[K^~~~~~[m[K
+[01m[K/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/demos/Warp/src/boot.c:[m[K In function '[01m[KflashReadAllMemory[m[K':
+[01m[K/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/demos/Warp/src/boot.c:4819:9:[m[K [01;35m[Kwarning: [m[K'[01m[Kstatus[m[K' is used uninitialized in this function [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wuninitialized-Wuninitialized]8;;[m[K]
+ 4819 |  return [01;35m[Kstatus[m[K;
+      |         [01;35m[K^~~~~~[m[K
+[ 50%] [32mBuilding C object CMakeFiles/Warp.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/demos/Warp/src/SEGGER_RTT_printf.c.obj[0m
+[ 56%] [32mBuilding C object CMakeFiles/Warp.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/i2c/fsl_i2c_irq.c.obj[0m
+[ 62%] [32mBuilding C object CMakeFiles/Warp.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/demos/Warp/src/SEGGER_RTT.c.obj[0m
+[ 68%] [32mBuilding C object CMakeFiles/Warp.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/spi/fsl_spi_irq.c.obj[0m
+[ 75%] [32mBuilding C object CMakeFiles/Warp.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/drivers/src/lpuart/fsl_lpuart_irq.c.obj[0m
+[ 81%] [32mBuilding C object CMakeFiles/Warp.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/startup/MKL03Z4/system_MKL03Z4.c.obj[0m
+[ 87%] [32mBuilding C object CMakeFiles/Warp.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/platform/startup/startup.c.obj[0m
+[ 93%] [32mBuilding C object CMakeFiles/Warp.dir/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/boards/Warp/gpio_pins.c.obj[0m
+[100%] [32m[1mLinking C executable release/Warp.elf[0m
+make[3]: Leaving directory '/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/demos/Warp/armgcc/Warp'
+[100%] Built target Warp
+make[2]: Leaving directory '/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/demos/Warp/armgcc/Warp'
+make[1]: Leaving directory '/home/francis_mcmullan/Documents/Coursework_2/Warp-Firmware/build/ksdk1.1/work/demos/Warp/armgcc/Warp'
+
+
+Now, run
+
+	make load-warp
+
+
+[?2004h]0;francis_mcmullan@Coursework: ~/Documents/Coursework_2/Warp-Firmware[01;32mfrancis_mcmullan@Coursework[00m:[01;34m~/Documents/Coursework_2/Warp-Firmware[00m$ make load-wra[K[Karp
+[?2004l/usr/bin/JLinkExe -device MKL03Z32XXX4 -if SWD -speed 10000 -CommanderScript tools/scripts/warp.jlink.commands
+SEGGER J-Link Commander V7.94i (Compiled Feb  7 2024 17:10:11)
+DLL version V7.94i, compiled Feb  7 2024 17:09:47
+
+
+J-Link Command File read successfully.
+Processing script file...
+J-Link>power on perm
+J-Link connection not established yet but required for command.
+Connecting to J-Link via USB...O.K.
+Firmware: J-Link OpenSDA compiled Jan 31 2023 13:42:36
+Hardware version: V1.00
+J-Link uptime (since boot): 0d 03h 04m 11s
+S/N: 621000000
+VTref=3.300V
+The connected debug probe does not support this command.
+J-Link>exec EnableRemarks
+ERROR : Expected a dec value
+J-Link>unlock kinetis
+Found SWD-DP with ID 0x0BC11477
+Unlocking device...O.K.
+J-Link>loadfile /home/francis_mcmullan/Documents/Coursework_2/Warp-firmware/build/ksdk1.1/work/demos/Warp/armgcc/Warp/release/Warp.srec
+Target connection not established yet but required for command.
+Device "MKL03Z32XXX4" selected.
+
+
+Connecting to target via SWD
+ConfigTargetSettings() start
+ConfigTargetSettings() end - Took 1.12ms
+InitTarget() start
+InitTarget()
+SWD selected. Executing JTAG -> SWD switching sequence.
+InitTarget() end - Took 218ms
+Found SW-DP with ID 0x0BC11477
+DPv0 detected
+CoreSight SoC-400 or earlier
+AP map detection skipped. Manually configured AP map found.
+AP[0]: AHB-AP (IDR: Not set)
+AP[1]: MEM-AP (IDR: Not set)
+AP[0]: Core found
+AP[0]: AHB-AP ROM base: 0xF0002000
+CPUID register: 0x410CC601. Implementer code: 0x41 (ARM)
+Found Cortex-M0 r0p1, Little endian.
+FPUnit: 2 code (BP) slots and 0 literal slots
+CoreSight components:
+ROMTbl[0] @ F0002000
+[0][0]: F0000000 CID B105900D PID 001BB932 MTB-M0+
+[0][1]: F0001000 CID B105900D PID 0008E000 MTBDWT
+[0][2]: E00FF000 CID B105100D PID 000BB4C0 ROM Table
+ROMTbl[1] @ E00FF000
+[1][0]: E000E000 CID B105E00D PID 000BB008 SCS
+[1][1]: E0001000 CID B105E00D PID 000BB00A DWT
+[1][2]: E0002000 CID B105E00D PID 000BB00B FPB
+Memory zones:
+  Zone: "Default" Description: Default access mode
+Cortex-M0 identified.
+'loadfile': Performing implicit reset & 
