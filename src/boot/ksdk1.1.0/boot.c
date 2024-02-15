@@ -76,17 +76,19 @@
 /*
 * Include all sensors because they will be needed to decode flash.
 */
-#include "devADXL362.h"
-#include "devAMG8834.h"
+#if (!WARP_BUILD_ENABLE_FRDMKL03)
+	#include "devADXL362.h"
+	#include "devAMG8834.h"
+	#include "devMAG3110.h"
+	#include "devL3GD20H.h"
+	#include "devBME680.h"
+	#include "devBMX055.h"
+	#include "devCCS811.h"
+	#include "devHDC1000.h"
+	#include "devRV8803C7.h"
+#endif
+#include "devSSD1331.h"
 #include "devMMA8451Q.h"
-#include "devMAG3110.h"
-#include "devL3GD20H.h"
-#include "devBME680.h"
-#include "devBMX055.h"
-#include "devCCS811.h"
-#include "devHDC1000.h"
-#include "devRV8803C7.h"
-
 
 #if (WARP_BUILD_ENABLE_DEVADXL362)
 	volatile WarpSPIDeviceState			deviceADXL362State;
@@ -2019,7 +2021,7 @@ main(void)
 		}
 	}
 #endif
-
+	devSSD1331init();
 	while (1)
 	{
 		/*

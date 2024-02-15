@@ -38,7 +38,7 @@ gpio_output_pin_user_config_t	outputPins[] = {
 			.config.slewRate = kPortSlowSlewRate,
 			.config.driveStrength = kPortLowDriveStrength,
 		},
-		/*	We only use these as SPI, despite being connected to RTS/CTS on revC
+		// 	We only use these as SPI, despite being connected to RTS/CTS on revC
 		{
 			.pinName = kWarpPinSPI_MISO_UART_RTS,
 			.config.outputLogic = 1,
@@ -51,7 +51,7 @@ gpio_output_pin_user_config_t	outputPins[] = {
 			.config.slewRate = kPortSlowSlewRate,
 			.config.driveStrength = kPortLowDriveStrength,
 		},
-		*/
+		
 		{
 			.pinName = kWarpPinADXL362_SPI_nCS,
 			.config.outputLogic = 1,
@@ -166,7 +166,47 @@ gpio_output_pin_user_config_t	outputPins[] = {
 			.config.driveStrength = kPortLowDriveStrength,
 		},
 	#elif (WARP_BUILD_ENABLE_FRDMKL03)
+		{
+			.pinName = kWarpPinUnusedPTA8,
+			.config.outputLogic = 1,
+			.config.slewRate = kPortSlowSlewRate,
+			.config.driveStrength = kPortLowDriveStrength,
 
+		},{
+			.pinName = kWarpPinUnusedPTA6,
+			.config.outputLogic = 1,
+			.config.slewRate = kPortSlowSlewRate,
+			.config.driveStrength = kPortLowDriveStrength,
+
+		},
+		{
+			.pinName = kWarpPinUnusedPTA9,
+			.config.outputLogic = 1,
+			.config.slewRate = kPortSlowSlewRate,
+			.config.driveStrength = kPortLowDriveStrength,
+
+		},
+		{
+			.pinName = kWarpPinUnusedPTA12,
+			.config.outputLogic = 1,
+			.config.slewRate = kPortSlowSlewRate,
+			.config.driveStrength = kPortLowDriveStrength,
+
+		},
+		{
+			.pinName = kWarpPinUnusedPTB13,
+			.config.outputLogic = 1,
+			.config.slewRate = kPortSlowSlewRate,
+			.config.driveStrength = kPortLowDriveStrength,
+
+		},
+		{
+			.pinName = kWarpPinUnusedPTB0,
+			.config.outputLogic = 1,
+			.config.slewRate = kPortSlowSlewRate,
+			.config.driveStrength = kPortLowDriveStrength,
+
+		},
 	#endif
 
 	{
