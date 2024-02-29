@@ -188,11 +188,6 @@
 	volatile WarpI2CDeviceState			deviceINA219State;
 #endif
 
-#if (WARP_BUILD_ENABLE_DEVINA219)
-	#include "devINA219.h"
-	volatile WarpI2CDeviceState			deviceINA219State;
-#endif
-
 #if (WARP_BUILD_ENABLE_DEVBGX)
 	#include "devBGX.h"
 	volatile WarpUARTDeviceState			deviceBGXState;
@@ -2356,14 +2351,6 @@ main(void)
 					{
 						menuTargetSensor = kWarpSensorAS7263;
 						menuI2cDevice = &deviceAS7263State;
-						break;
-					}
-#endif
-#if (WARP_BUILD_ENABLE_DEVINA219)
-					case 'l':
-					{
-						menuTargetSensor = kWarpSensorINA219;
-						menuI2cDevice = &deviceINA219State;
 						break;
 					}
 #endif

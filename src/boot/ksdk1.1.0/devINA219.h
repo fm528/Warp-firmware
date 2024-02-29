@@ -166,5 +166,5 @@ typedef struct {
 void initINA219(const uint8_t i2cAddress, uint16_t operatingVoltageMillivolts);
 WarpStatus configureSensorINA219(configINA219_t config);
 WarpStatus readSensorRegisterINA219(uint8_t deviceRegister, int numberOfBytes);
-WarpStatus writeSensorRegisterINA219(uint8_t deviceRegister, uint8_t payload);
+WarpStatus writeSensorRegisterINA219(uint8_t deviceRegister, uint16_t payload);
 void printSensorDataINA219(bool hexModeFlag);
