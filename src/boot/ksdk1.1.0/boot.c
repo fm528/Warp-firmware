@@ -1704,10 +1704,6 @@ main(void)
 		initINA219(	0x40	/* i2cAddress */,	kWarpDefaultSupplyVoltageMillivoltsINA219	);
 #endif
 
-#if (WARP_BUILD_ENABLE_DEVINA219)
-		initINA219(	0x40	/* i2cAddress */,	kWarpDefaultSupplyVoltageMillivoltsINA219	);
-#endif
-
 #if (WARP_BUILD_ENABLE_DEVL3GD20H)
 		initL3GD20H(	0x6A	/* i2cAddress */,	kWarpDefaultSupplyVoltageMillivoltsL3GD20H	);
 #endif
@@ -2034,7 +2030,6 @@ main(void)
 		}
 	}
 #endif
-	devSSD1331init();
 	while (1)
 	{
 		/*
@@ -2191,12 +2186,6 @@ main(void)
 					warpPrint("\r\t- 'k' AS7263			(0x00--0x2B): 2.7V -- 3.6V\n");
 #else
 					warpPrint("\r\t- 'k' AS7263			(0x00--0x2B): 2.7V -- 3.6V (compiled out) \n");
-#endif
-
-#if (WARP_BUILD_ENABLE_DEVINA219)
-					warpPrint("\r\t- 'l' INA219			(0x00--0x05): 3.0V -- 5.5V\n");
-#else
-					warpPrint("\r\t- 'l' INA219			(0x00--0x05): 3.0V -- 5.5V (compiled out) \n");
 #endif
 
 #if (WARP_BUILD_ENABLE_DEVINA219)
@@ -3614,6 +3603,10 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 		warpPrint(" HDC1000 Temp, HDC1000 Hum,");
 #endif
 
+#if (WARP_BUILD_ENABLE_DEVINA219)
+		warpPrint(" INA219 Current ");
+#endif
+
 #if (WARP_CSVSTREAM_FLASH_PRINT_METADATA)
 		warpPrint(" RTC->TSR, RTC->TPR,");
 #endif
@@ -3664,6 +3657,10 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 
 #if (WARP_BUILD_ENABLE_DEVHDC1000)
 		printSensorDataHDC1000(hexModeFlag);
+#endif
+
+#if (WARP_BUILD_ENABLE_DEVINA219)
+		printSensorDataINA219(hexModeFlag);
 #endif
 
 #if (WARP_CSVSTREAM_FLASH_PRINT_METADATA)
