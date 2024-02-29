@@ -354,6 +354,8 @@ void initINA219(const uint8_t i2cAddress, uint16_t operatingVoltattgeMillivolts)
             .BRNG = INA219_CONFIG_BVOLTAGERANGE_32V,
             .RST = INA219_CONFIG_RESET});
 
+    
+
     return;
 }
 
@@ -431,6 +433,8 @@ readSensorRegisterINA219(uint8_t deviceRegister, int numberOfBytes)
         0,
         gWarpI2cTimeoutMilliseconds);
 
+    SEGGER_RTT_WriteString(0, "status1: ");
+
     status2 = I2C_DRV_MasterReceiveDataBlocking(
         0,
         &slave,
@@ -438,7 +442,9 @@ readSensorRegisterINA219(uint8_t deviceRegister, int numberOfBytes)
         0,
         (uint8_t *)deviceINA219State.i2cBuffer,
         numberOfBytes,
-        gWarpI2cTimeoutMilliseconds);
+        gWarpI2cTimeoutMilliseconds)
+
+    SEGGER_RTT_WriteString(0, "status2: ");
 
     if ((status1 != kStatus_I2C_Success || status2 != kStatus_I2C_Success))
     {
@@ -453,6 +459,7 @@ configureSensorINA219(configINA219_t config)
 {
     WarpStatus status1, status2;
 
+    SEGGER_RTT_WriteString(0, "configuring INA219\n");
     warpScaleSupplyVoltage(deviceINA219State.operatingVoltageMillivolts);
 
     uint16_t payloadByte = (config.mode & 0x07) | (config.SADC & 0x78) | (config.BADC & 0x780) | (config.PG & 0x1800) | (config.BRNG & 0x6000) | (config.RST & 0x8000);
