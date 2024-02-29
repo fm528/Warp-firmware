@@ -3832,6 +3832,144 @@ loopForSensor(	const char *  tagString,
 
 	return;
 }
+void
+loopForSensor2bytes(	const char *  tagString,
+		WarpStatus  (* readSensorRegisterFunction)(uint8_t deviceRegister, int numberOfBytes),
+		volatile WarpI2CDeviceState *  i2cDeviceState,
+		volatile WarpSPIDeviceState *  spiDeviceState,
+		uint8_t  baseAddress,
+		uint8_t  minAddress,
+		uint8_t  maxAddress,
+		int  repetitionsPerAddress,
+		int  chunkReadsPerAddress,
+		int  spinDelay,
+		bool  autoIncrement,
+		uint16_t  sssupplyMillivolts,
+		uint8_t  referenceByte,
+		uint16_t adaptiveSssupplyMaxMillivolts,
+		bool  chatty
+		)
+{
+	WarpStatus		status;
+	uint8_t			address = min(minAddress, baseAddress);
+	int			readCount = repetitionsPerAddress + 1;
+	int			nSuccesses = 0;
+	int			nFailures = 0;
+	int			nCorrects = 0;
+	int			nBadCommands = 0;
+	uint16_t		actualSssupplyMillivolts = sssupplyMillivolts;
+
+
+	if (	(!spiDeviceState && !i2cDeviceState) ||
+		(spiDeviceState && i2cDeviceState) )
+	{
+		warpPrint(RTT_CTRL_RESET RTT_CTRL_BG_BRIGHT_YELLOW RTT_CTRL_TEXT_BRIGHT_WHITE kWarpConstantStringErrorSanity RTT_CTRL_RESET "\n");
+	}
+
+	warpScaleSupplyVoltage(actualSssupplyMillivolts);
+	warpPrint(tagString);
+
+	/*
+	 *	Keep on repeating until we are above the maxAddress, or just once if not autoIncrement-ing
+	 *	This is checked for at the tail end of the loop.
+	 */
+	while (true)
+	{
+		for (int i = 0; i < readCount; i++) for (int j = 0; j < chunkReadsPerAddress; j++)
+			{
+			status = readSensorRegisterFunction(address+j, 2 /* numberOfBytes */);
+				if (status == kWarpStatusOK)
+				{
+					nSuccesses++;
+					if (actualSssupplyMillivolts > sssupplyMillivolts)
+					{
+						actualSssupplyMillivolts -= 100;
+						warpScaleSupplyVoltage(actualSssupplyMillivolts);
+					}
+
+					if (spiDeviceState)
+					{
+						if (referenceByte == spiDeviceState->spiSinkBuffer[2])
+						{
+							nCorrects++;
+						}
+
+						if (chatty)
+						{
+						warpPrint("\r\t0x%02x --> [0x%02x 0x%02x 0x%02x]\n",
+							address+j,
+									  spiDeviceState->spiSinkBuffer[0],
+									  spiDeviceState->spiSinkBuffer[1],
+									  spiDeviceState->spiSinkBuffer[2]);
+						}
+					}
+					else
+					{
+						if (referenceByte == i2cDeviceState->i2cBuffer[0])
+						{
+							nCorrects++;
+						}
+
+						if (chatty)
+						{
+						warpPrint("\r\t0x%02x --> 0x%02x 0x%02x\n",
+							address+j,
+									  i2cDeviceState->i2cBuffer[0],
+                                      i2cDeviceState->i2cBuffer[1]);
+						}
+					}
+				}
+				else if (status == kWarpStatusDeviceCommunicationFailed)
+				{
+				warpPrint("\r\t0x%02x --> ----\n",
+					address+j);
+
+					nFailures++;
+					if (actualSssupplyMillivolts < adaptiveSssupplyMaxMillivolts)
+					{
+						actualSssupplyMillivolts += 100;
+						warpScaleSupplyVoltage(actualSssupplyMillivolts);
+					}
+				}
+				else if (status == kWarpStatusBadDeviceCommand)
+				{
+					nBadCommands++;
+				}
+
+				if (spinDelay > 0)
+				{
+					OSA_TimeDelay(spinDelay);
+				}
+			}
+
+		if (autoIncrement)
+		{
+			address++;
+		}
+
+		if (address > maxAddress || !autoIncrement)
+		{
+			/*
+			 *	We either iterated over all possible addresses, or were asked to do only
+			 *	one address anyway (i.e. don't increment), so we're done.
+			 */
+			break;
+		}
+	}
+
+	/*
+	 *	We intersperse RTT_printfs with forced delays to allow us to use small
+	 *	print buffers even in RUN mode.
+	 */
+	warpPrint("\r\n\t%d/%d success rate.\n", nSuccesses, (nSuccesses + nFailures));
+	OSA_TimeDelay(50);
+	warpPrint("\r\t%d/%d successes matched ref. value of 0x%02x.\n", nCorrects, nSuccesses, referenceByte);
+	OSA_TimeDelay(50);
+	warpPrint("\r\t%d bad commands.\n\n", nBadCommands);
+	OSA_TimeDelay(50);
+
+	return;
+}
 
 void
 repeatRegisterReadForDeviceAndAddress(WarpSensorDevice warpSensorDevice, uint8_t baseAddress, bool autoIncrement, int chunkReadsPerAddress, bool chatty, int spinDelay, int repetitionsPerAddress, uint16_t sssupplyMillivolts, uint16_t adaptiveSssupplyMaxMillivolts, uint8_t referenceByte)
@@ -4337,7 +4475,7 @@ repeatRegisterReadForDeviceAndAddress(WarpSensorDevice warpSensorDevice, uint8_t
  *	INA219: VDD 3.0--5.5
  */
 #if (WARP_BUILD_ENABLE_DEVINA219)
-				loopForSensor(	"\r\nINA219:\n\r",		/*	tagString			*/
+				loopForSensor2bytes(	"\r\nINA219:\n\r",		/*	tagString			*/
 						&readSensorRegisterINA219,	/*	readSensorRegisterFunction	*/
 						&deviceINA219State,		/*	i2cDeviceState			*/
 						NULL,				/*	spiDeviceState			*/
