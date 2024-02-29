@@ -72,8 +72,8 @@ enum _gpio_pins
 		kWarpPinUnusedPTB0			= GPIO_MAKE_PIN(HW_GPIOB, 0),
 		kWarpPinUnusedPTB1			= GPIO_MAKE_PIN(HW_GPIOB, 1),
 		kWarpPinUnusedPTB2			= GPIO_MAKE_PIN(HW_GPIOB, 2),
-		kWarpPinUnusedPTB3			= GPIO_MAKE_PIN(HW_GPIOB, 3),
-		kWarpPinUnusedPTB4			= GPIO_MAKE_PIN(HW_GPIOB, 4),
+		kWarpPinI2C0_SCL			= GPIO_MAKE_PIN(HW_GPIOB, 3),
+		kWarpPinI2C0_SDA			= GPIO_MAKE_PIN(HW_GPIOB, 4),
 		kWarpPinUnusedPTB5			= GPIO_MAKE_PIN(HW_GPIOB, 5),
 		kWarpPinUnusedPTB6			= GPIO_MAKE_PIN(HW_GPIOB, 6),
 		kWarpPinUnusedPTB7			= GPIO_MAKE_PIN(HW_GPIOB, 7),
@@ -96,7 +96,7 @@ enum _gpio_pins
 		#if (WARP_BUILD_ENABLE_GLAUX_VARIANT)
 			kGlauxPinFlash_SPI_nCS		= GPIO_MAKE_PIN(HW_GPIOB, 2),
 		#else
-			kWarpPinSI4705_nRST		= GPIO_MAKE_PIN(HW_GPIOB, 2),
+			kWarpPinSI4705_nRST			= GPIO_MAKE_PIN(HW_GPIOB, 2),
 		#endif
 
 		kWarpPinI2C0_SCL_UART_TX		= GPIO_MAKE_PIN(HW_GPIOB, 3),
@@ -106,7 +106,7 @@ enum _gpio_pins
 		kWarpPinTPS62740_VSEL3			= GPIO_MAKE_PIN(HW_GPIOB, 7),
 		kWarpPinTPS62740_VSEL2			= GPIO_MAKE_PIN(HW_GPIOB, 10),
 		kWarpPinTPS62740_VSEL1			= GPIO_MAKE_PIN(HW_GPIOB, 11),
-		kWarpPinCLKOUT32K			= GPIO_MAKE_PIN(HW_GPIOB, 13),
+		kWarpPinCLKOUT32K				= GPIO_MAKE_PIN(HW_GPIOB, 13),
 	#endif
 };
 
