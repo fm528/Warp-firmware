@@ -2082,7 +2082,11 @@ main(void)
 
 		warpPrint("\r- 'x': disable SWD and spin for 10 secs.\n");
 		warpPrint("\r- 'z': perpetually dump all sensor data.\n");
+#if (WARP_BUILD_ENABLE_DEVINA219)
 
+		warpPrint("\r- '1': print 1000 sensor reads for INA219.\n");
+
+#endif
 		warpPrint("\rEnter selection> ");
 		key = warpWaitKey();
 
@@ -3170,6 +3174,16 @@ main(void)
 				break;
 			}
 
+			case '1':
+			{
+							warpPrint("\r\n INA219 Current, INA219 Voltage, INA219 Power\n\n");
+			for(int i=0; i< 1000; i++){
+
+						printSensorDataINA219(0);
+				warpPrint("\n");
+				}
+				break;
+			}
 			default:
 			{
 				warpPrint("\r\tInvalid selection '%c' !\n", key);
@@ -3605,13 +3619,13 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 #endif
 
 #if (WARP_BUILD_ENABLE_DEVINA219)
-		warpPrint(" INA219 Current ");
+		warpPrint(" INA219 Current, INA219 Voltage, INA219 Power,");
 #endif
 
 #if (WARP_CSVSTREAM_FLASH_PRINT_METADATA)
 		warpPrint(" RTC->TSR, RTC->TPR,");
 #endif
-		warpPrint(" numberOfConfigErrors");
+		warpPrint(" time");
 		warpPrint("\n\n");
 	}
 
@@ -3667,7 +3681,7 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 #if (WARP_CSVSTREAM_FLASH_PRINT_METADATA)
 		warpPrint(" %12d, %6d,", RTC->TSR, RTC->TPR);
 #endif
-		warpPrint(" %u\n", numberOfConfigErrors);
+		warpPrint(" %u\n", OSA_TimeGetMsec());
 
 		if (menuDelayBetweenEachRun > 0)
 		{
@@ -3913,7 +3927,7 @@ loopForSensor2bytes(	const char *  tagString,
 
 						if (chatty)
 						{
-						warpPrint("\r\t0x%02x --> 0x%02x 0x%02x\n",
+						warpPrint("\r\t0x%02x --> %d\n",
 							address+j,
 									  i2cDeviceState->i2cBuffer[0],
                                       i2cDeviceState->i2cBuffer[1]);
