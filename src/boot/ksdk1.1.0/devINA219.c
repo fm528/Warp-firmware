@@ -493,7 +493,7 @@ printSensorDataINA219(bool hexModeFlag)
         }
     }
 
-    i2cReadStatus = readSensorRegisterINA219(INA219_REG_BUSVOLTAGE, 2);
+    i2cReadStatus = readSensorRegisterINA219(INA219_REG_SHUNTVOLTAGE, 2);
     readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
     readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
     readSensorRegisterValueCombined = ((readSensorRegisterValueMSB & 0xff) << 8) | (readSensorRegisterValueLSB & 0xff);
@@ -510,7 +510,7 @@ printSensorDataINA219(bool hexModeFlag)
         }
         else
         {
-            warpPrint(" %d, ", readSensorRegisterValueCombined);
+            warpPrint(" %d, ", readSensorRegisterValueCombined * 10);
         }
     }
 
@@ -531,7 +531,28 @@ printSensorDataINA219(bool hexModeFlag)
         }
         else
         {
-            warpPrint(" %d, ", readSensorRegisterValueCombined);
+            warpPrint(" %d, ", readSensorRegisterValueCombined*2);
+        }
+    }
+
+    i2cReadStatus = readSensorRegisterINA219(INA219_REG_BUSVOLTAGE, 2);
+    readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
+    readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
+    readSensorRegisterValueCombined = ((((readSensorRegisterValueMSB & 0xff) << 8) | (readSensorRegisterValueLSB & 0xff)) >> 3);
+
+    if (i2cReadStatus != kWarpStatusOK)
+    {
+        warpPrint("----,");
+    }
+    else
+    {
+        if (hexModeFlag)
+        {
+            warpPrint("0x%02x 0x%02x, ", readSensorRegisterValueMSB, readSensorRegisterValueLSB);
+        }
+        else
+        {
+            warpPrint(" %d, ", readSensorRegisterValueCombined * 4);
         }
     }
 
