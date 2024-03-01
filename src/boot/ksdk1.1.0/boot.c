@@ -2030,6 +2030,7 @@ main(void)
 		}
 	}
 #endif
+	devSSD1331init();
 	while (1)
 	{
 		/*
@@ -3714,7 +3715,7 @@ loopForSensor(	const char *  tagString,
 		)
 {
 	WarpStatus		status;
-	uint8_t			address = min(minAddress, baseAddress);
+	uint8_t			address = max(minAddress, baseAddress);
 	int			readCount = repetitionsPerAddress + 1;
 	int			nSuccesses = 0;
 	int			nFailures = 0;
@@ -3851,7 +3852,7 @@ loopForSensor2bytes(	const char *  tagString,
 		)
 {
 	WarpStatus		status;
-	uint8_t			address = min(minAddress, baseAddress);
+	uint8_t			address = max(minAddress, baseAddress);
 	int			readCount = repetitionsPerAddress + 1;
 	int			nSuccesses = 0;
 	int			nFailures = 0;

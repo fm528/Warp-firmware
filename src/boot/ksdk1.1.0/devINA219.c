@@ -472,8 +472,8 @@ void printSensorDataINA219(bool hexModeFlag)
 
     warpScaleSupplyVoltage(deviceINA219State.operatingVoltageMillivolts);
     i2cReadStatus = readSensorRegisterINA219(INA219_REG_CURRENT, 2);
-    readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[0];
-    readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[1];
+    readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
+    readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
     readSensorRegisterValueCombined = ((readSensorRegisterValueMSB & 0xff) << 8) | (readSensorRegisterValueLSB & 0xff);
 
     if (i2cReadStatus != kWarpStatusOK)
@@ -488,7 +488,7 @@ void printSensorDataINA219(bool hexModeFlag)
         }
         else
         {
-            warpPrint(" %d, ", readSensorRegisterValueCombined);
+            warpPrint(" %d, ", readSensorRegisterValueCombined * 10);
         }
     }
 }
