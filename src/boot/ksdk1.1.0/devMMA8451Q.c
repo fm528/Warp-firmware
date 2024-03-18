@@ -70,6 +70,13 @@ initMMA8451Q(const uint8_t i2cAddress, uint16_t operatingVoltageMillivolts)
 	deviceMMA8451QState.i2cAddress			= i2cAddress;
 	deviceMMA8451QState.operatingVoltageMillivolts	= operatingVoltageMillivolts;
 
+	configureSensorMMA8451Q(
+		0x00, /* Payload: Disable FIFO */
+		0b00011001,  /* Normal read 8bit, 100Hz, normal, active mode */
+		0b00010000, /* High Pass Filter, 2 g full scale */
+		0b00000011  /* Cut-off at 0.5 Hz*/
+	);
+
 	return;
 }
 
@@ -128,9 +135,9 @@ writeSensorRegisterMMA8451Q(uint8_t deviceRegister, uint8_t payload)
 }
 
 WarpStatus
-configureSensorMMA8451Q(uint8_t payloadF_SETUP, uint8_t payloadCTRL_REG1)
+configureSensorMMA8451Q(uint8_t payloadF_SETUP, uint8_t payloadCTRL_REG1, uint8_t payloadXYZ_DATA_CFG, uint8_t payloadHP_FILTER_CUTOFF)
 {
-	WarpStatus	i2cWriteStatus1, i2cWriteStatus2;
+	WarpStatus	i2cWriteStatus1, i2cWriteStatus2, i2cWriteStatus3, i2cWriteStatus4;
 
 
 	warpScaleSupplyVoltage(deviceMMA8451QState.operatingVoltageMillivolts);
@@ -143,7 +150,15 @@ configureSensorMMA8451Q(uint8_t payloadF_SETUP, uint8_t payloadCTRL_REG1)
 												  payloadCTRL_REG1 /* payload */
 	);
 
-	return (i2cWriteStatus1 | i2cWriteStatus2);
+	i2cWriteStatus3 = writeSensorRegisterMMA8451Q(kWarpSensorConfigurationRegisterMMA8451QXYZ_DATA_CFG /* register address XYZ_DATA_CFG */,
+												  payloadXYZ_DATA_CFG /* payload */
+	);
+
+	i2cWriteStatus4 = writeSensorRegisterMMA8451Q(kWarpSensorConfigurationRegisterMMA8451QHP_FILTER_CUTOFF /* register address HP_FILTER_CUTOFF */,
+												  payloadHP_FILTER_CUTOFF /* payload */
+	);
+
+	return (i2cWriteStatus1 | i2cWriteStatus2 | i2cWriteStatus3 | i2cWriteStatus4);
 }
 
 WarpStatus
