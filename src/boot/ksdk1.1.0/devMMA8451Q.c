@@ -56,6 +56,7 @@
 #include "SEGGER_RTT.h"
 #include "warp.h"
 
+#include "devMMA8451Q.h"
 
 extern volatile WarpI2CDeviceState	deviceMMA8451QState;
 extern volatile uint32_t		gWarpI2cBaudRateKbps;
@@ -64,21 +65,6 @@ extern volatile uint32_t		gWarpSupplySettlingDelayMilliseconds;
 
 
 
-void
-initMMA8451Q(const uint8_t i2cAddress, uint16_t operatingVoltageMillivolts)
-{
-	deviceMMA8451QState.i2cAddress			= i2cAddress;
-	deviceMMA8451QState.operatingVoltageMillivolts	= operatingVoltageMillivolts;
-
-	configureSensorMMA8451Q(
-		0x00, /* Payload: Disable FIFO */
-		0b00011001,  /* Normal read 8bit, 100Hz, normal, active mode */
-		0b00010000, /* High Pass Filter, 2 g full scale */
-		0b00000011  /* Cut-off at 0.5 Hz*/
-	);
-
-	return;
-}
 
 WarpStatus
 writeSensorRegisterMMA8451Q(uint8_t deviceRegister, uint8_t payload)
@@ -435,4 +421,20 @@ appendSensorDataMMA8451Q(uint8_t* buf)
 		index += 1;
 	}
 	return index;
+}
+
+void
+initMMA8451Q(const uint8_t i2cAddress, uint16_t operatingVoltageMillivolts)
+{
+	deviceMMA8451QState.i2cAddress			= i2cAddress;
+	deviceMMA8451QState.operatingVoltageMillivolts	= operatingVoltageMillivolts;
+
+	configureSensorMMA8451Q(
+		0x00, /* Payload: Disable FIFO */
+		0b00011001,  /* Normal read 8bit, 100Hz, normal, active mode */
+		0b00010000, /* High Pass Filter, 2 g full scale */
+		0b00000011  /* Cut-off at 0.5 Hz*/
+	);
+
+	return;
 }
