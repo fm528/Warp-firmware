@@ -29,43 +29,6 @@
 
 #include "Activity-Classifier.h"
 
-// Function to initialize the activity classifier
-void ActivityClassifier_Init(void)
-{
-    // Initialize the accelerometer
-    Accelerometer_Init();
-}
-
-// Function to run the activity classifier
-void ActivityClassifier_Run(void)
-{
-    // Run the accelerometer
-    Accelerometer_Run();
-}
-
-// Function to deinitialize the activity classifier
-void ActivityClassifier_Deinit(void)
-{
-    // Deinitialize the accelerometer
-    Accelerometer_Deinit();
-}
-
-uint16_t highPassFilter(uint16_t data)
-{
-    
-
-    
-
-
-
-
-
-    return data;
-}
-
-
-
-
 
 // Function to implement a memory-efficient median filter
 uint16_t medianFilter(uint16_t data[], uint16_t size)
@@ -149,7 +112,7 @@ uint8_t classifyActivity(uint16_t accelerationData[], uint16_t size, uint16_t fi
 #include <complex.h>
 #include <math.h>
 
-void fft(uint16_t data[], uint16_t size, float fftData[])
+void fft(uint16_t data[], uint16_t size, uint16_t fftData[])
 {
     // Calculate the number of stages
     uint16_t numStages = log2(size);
@@ -171,22 +134,27 @@ void fft(uint16_t data[], uint16_t size, float fftData[])
             uint16_t index2 = index1 + butterflyDistance;
 
             // Calculate the twiddle factor
-            float complex twiddleFactor = cexp(-I * 2 * M_PI * butterfly / (2 * numButterflies));
+            int16_t twiddleFactorReal = cos(-2 * M_PI * butterfly / (2 * numButterflies)) * (1 << 14);
+            int16_t twiddleFactorImag = sin(-2 * M_PI * butterfly / (2 * numButterflies)) * (1 << 14);
 
             // Perform the butterfly operation
-            float complex butterfly1 = data[index1];
-            float complex butterfly2 = twiddleFactor * data[index2];
+            int16_t butterfly1Real = data[index1].real;
+            int16_t butterfly1Imag = data[index1].imag;
+            int16_t butterfly2Real = (twiddleFactorReal * data[index2].real - twiddleFactorImag * data[index2].imag) >> 14;
+            int16_t butterfly2Imag = (twiddleFactorReal * data[index2].imag + twiddleFactorImag * data[index2].real) >> 14;
 
             // Update the data array with the butterfly results
-            data[index1] = butterfly1 + butterfly2;
-            data[index2] = butterfly1 - butterfly2;
+            data[index1].real = butterfly1Real + butterfly2Real;
+            data[index1].imag = butterfly1Imag + butterfly2Imag;
+            data[index2].real = butterfly1Real - butterfly2Real;
+            data[index2].imag = butterfly1Imag - butterfly2Imag;
         }
     }
 
     // Calculate the magnitude of the FFT data
     for (uint16_t i = 0; i < size / 2 + 1; i++)
     {
-        fftData[i] = cabs(data[i]);
+        fftData[i] = sqrt((data[i].real * data[i].real + data[i].imag * data[i].imag) >> 14);
     }
 }
 
