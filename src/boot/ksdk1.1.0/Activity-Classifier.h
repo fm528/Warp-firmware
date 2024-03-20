@@ -5,13 +5,9 @@
 
 
 // Function prototypes
-void ActivityClassifier_Init(void);
-void ActivityClassifier_Run(void);
-void ActivityClassifier_Deinit(void);
-uint16_t lowPassFilter(uint16_t data);
-uint16_t highPassFilter(uint16_t data);
-uint8_t classifyActivity(uint16_t accelerationData[], uint16_t size, uint16_t filterLength, uint16_t windowLength, uint16_t threshold);
-uint8_t activityClassifier(uint16_t accelerationData[], uint8_t size, uint8_t samplingRate);
+uint16_t medianFilter(uint16_t data[], uint16_t size)
+// Function to process high pass filtered data and perform step counting
+uint8_t processData(uint16_t data[][3], uint16_t size)
 
 
 // activity flags i.e. walk, run, stand, liedown

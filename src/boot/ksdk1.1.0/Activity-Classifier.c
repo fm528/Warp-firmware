@@ -1,11 +1,3 @@
-// This is a module that coontains the functions required to classify the activity of the user
-// using the accelerometer data. The module first high passes the accelerometer data to remove the
-// gravity component and then low passes to remove noise.  The module then uses the filtered data
-// to classify the activity of the user. The module uses a simple threshold based classifier to
-// classify the activity of the user. This calculates the magnitude-duration area of the filtered
-// data and compares it with the threshold values to classify the activity of the user. The module
-// also contains the functions to set the threshold values for the classifier.
-
 #include <stdlib.h>
 
 /*
@@ -33,20 +25,16 @@
 // Function to implement a memory-efficient median filter
 uint16_t medianFilter(uint16_t data[], uint16_t size)
 {
-    // Create a copy of the data array
-    uint16_t sortedData[size];
-    memcpy(sortedData, data, size * sizeof(uint16_t));
-
     // Sort the data array in ascending order
     for (uint16_t i = 0; i < size - 1; i++)
     {
         for (uint16_t j = 0; j < size - i - 1; j++)
         {
-            if (sortedData[j] > sortedData[j + 1])
+            if (data[j] > data[j + 1])
             {
-                uint16_t temp = sortedData[j];
-                sortedData[j] = sortedData[j + 1];
-                sortedData[j + 1] = temp;
+                uint16_t temp = data[j];
+                data[j] = data[j + 1];
+                data[j + 1] = temp;
             }
         }
     }
@@ -55,149 +43,97 @@ uint16_t medianFilter(uint16_t data[], uint16_t size)
     uint16_t median;
     if (size % 2 == 0)
     {
-        median = (sortedData[size / 2 - 1] + sortedData[size / 2]) / 2;
+        median = (data[size / 2 - 1] + data[size / 2]) / 2;
     }
     else
     {
-        median = sortedData[size / 2];
+        median = data[size / 2];
     }
 
     return median;
 }
 
-uint8_t classifyActivity(uint16_t accelerationData[], uint16_t size, uint16_t filterLength, uint16_t windowLength, uint16_t threshold)
+// Function to process high pass filtered data and perform step counting
+uint8_t processData(uint16_t data[][3], uint16_t size)
 {
-    // Apply median filter to the acceleration data
-    uint16_t filteredData[size];
+    // Apply median filter to the data
+    uint16_t filteredData[size][3];
     for (uint16_t i = 0; i < size; i++)
     {
-        // Create a window of filterLength size
-        uint16_t window[filterLength];
-        for (uint16_t j = 0; j < filterLength; j++)
+        for (uint16_t j = 0; j < 13; j++)
         {
-            // Check if the index is within the bounds of the accelerationData array
-            if (i + j < size)
+            filteredData[i][j] = medianFilter(data[i], 13);
+        }
+    }
+
+    // Calculate the product of magnitude and duration
+    uint32_t product = 0;
+    for (uint16_t i = 0; i < size; i++)
+    {
+        for (uint16_t j = 0; j < 13; j++)
+        {
+            product += filteredData[i][j];
+        }
+    }
+
+    // Define the threshold for step counting
+    uint16_t stepCountThreshold = 2;
+
+    // Check if the product is larger than the threshold
+    if (product > threshold)
+    {
+        // Mark maximal, minimal, and mid points for a window of length 25
+        uint16_t maxPoints = 0;
+        uint16_t minPoints = 0;
+        uint16_t midPoints = 0;
+        for (uint16_t i = 0; i < size; i++)
+        {
+            for (uint16_t j = 0; j < 25; j++)
             {
-                window[j] = accelerationData[i + j];
+                if (filteredData[i][j] > filteredData[i][j + 1] && filteredData[i][j] > filteredData[i][j - 1])
+                {
+                    maxPoints++;
+                }
+                else if (filteredData[i][j] < filteredData[i][j + 1] && filteredData[i][j] < filteredData[i][j - 1])
+                {
+                    minPoints++;
+                }
+                else
+                {
+                    midPoints++;
+                }
             }
         }
 
-        // Apply median filter to the window
-        filteredData[i] = medianFilter(window, filterLength);
-    }
-
-    // Calculate the product of amplitude and time for consecutive windows
-    for (uint16_t i = 0; i < size - windowLength + 1; i+windowLength)
-    {
-        uint16_t product = 0;
-        for (uint16_t j = 0; j < windowLength; j++)
+        // Count the number of changes from max to min
+        uint16_t stepCount = 0;
+        for (uint16_t i = 0; i < size; i++)
         {
-            product += filteredData[i + j];
+            for (uint16_t j = 0; j < 25; j++)
+            {
+                if (filteredData[i][j] > filteredData[i][j + 1] && filteredData[i][j] > filteredData[i][j - 1] &&
+                    filteredData[i][j + 1] < filteredData[i][j + 2] && filteredData[i][j - 1] < filteredData[i][j - 2])
+                {
+                    stepCount++;
+                }
+            }
         }
 
-        // Compare the product with the threshold
-        if (product > threshold)
+        // Check if the step count is above the threshold
+        if (stepCount > stepCountThreshold)
         {
-            // Window is classified as active
-            return activityClassifier(filteredData, size, 50);
+            // Return the step count
+            return "STEP";
         }
         else
         {
-            // Window is classified as inactive
-            return REST;
+            // Return REST
+            return "REST";
         }
-    }
-}
-
-#include <complex.h>
-#include <math.h>
-
-void fft(uint16_t data[], uint16_t size, uint16_t fftData[])
-{
-    // Calculate the number of stages
-    uint16_t numStages = log2(size);
-
-    // Perform the FFT algorithm
-    for (uint16_t stage = 0; stage < numStages; stage++)
-    {
-        // Calculate the number of butterflies in this stage
-        uint16_t numButterflies = pow(2, stage);
-
-        // Calculate the distance between butterflies in this stage
-        uint16_t butterflyDistance = size / (2 * numButterflies);
-
-        // Perform the butterflies in this stage
-        for (uint16_t butterfly = 0; butterfly < numButterflies; butterfly++)
-        {
-            // Calculate the indices of the butterflies
-            uint16_t index1 = butterfly * butterflyDistance;
-            uint16_t index2 = index1 + butterflyDistance;
-
-            // Calculate the twiddle factor
-            int16_t twiddleFactorReal = cos(-2 * M_PI * butterfly / (2 * numButterflies)) * (1 << 14);
-            int16_t twiddleFactorImag = sin(-2 * M_PI * butterfly / (2 * numButterflies)) * (1 << 14);
-
-            // Perform the butterfly operation
-            int16_t butterfly1Real = data[index1].real;
-            int16_t butterfly1Imag = data[index1].imag;
-            int16_t butterfly2Real = (twiddleFactorReal * data[index2].real - twiddleFactorImag * data[index2].imag) >> 14;
-            int16_t butterfly2Imag = (twiddleFactorReal * data[index2].imag + twiddleFactorImag * data[index2].real) >> 14;
-
-            // Update the data array with the butterfly results
-            data[index1].real = butterfly1Real + butterfly2Real;
-            data[index1].imag = butterfly1Imag + butterfly2Imag;
-            data[index2].real = butterfly1Real - butterfly2Real;
-            data[index2].imag = butterfly1Imag - butterfly2Imag;
-        }
-    }
-
-    // Calculate the magnitude of the FFT data
-    for (uint16_t i = 0; i < size / 2 + 1; i++)
-    {
-        fftData[i] = sqrt((data[i].real * data[i].real + data[i].imag * data[i].imag) >> 14);
-    }
-}
-
-uint8_t activityClassifier(uint16_t accelerationData[], uint8_t size, uint8_t samplingRate) {
-    // Using the z axis data compute the FFT and find the largest frequency spike between 1 and 3 Hz
-
-    // Compute the FFT of the acceleration data on the z-axis
-
-    uint16_t fftSize = size / 2 + 1;
-    float fftData[fftSize];
-    fft(accelerationData[2], size, fftData);
-
-    // Find the largest frequency spike between 1 and 3 Hz
-    float maxAmplitude = 0;
-    uint16_t maxIndex = 0;
-    for (uint16_t i = 1; i < fftSize; i++)
-    {
-        float frequency = i * (samplingRate / size);
-        if (frequency >= 1 && frequency <= 3 && fftData[i] > maxAmplitude)
-        {
-            maxAmplitude = fftData[i];
-            maxIndex = i;
-        }
-    }
-
-    // Convert the index to frequency
-    float maxFrequency = maxIndex * (samplingRate / size);
-
-    // Calculate the step rate per minute
-    float stepRate = maxFrequency * 60;
-
-    // Check if the step rate exceeds the walking threshold
-    if (stepRate <= WALKRUN_THRESHOLD)
-    {
-        return WALK;
-    }
-    // Check if the step rate exceeds the running threshold
-    else if (stepRate <= WALKRUN_THRESHOLD)
-    {
-        return RUN;
     }
     else
     {
-        return ERR;
+        // Return REST
+        return REST;
     }
 }
