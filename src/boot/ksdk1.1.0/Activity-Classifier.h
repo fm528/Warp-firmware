@@ -7,7 +7,7 @@
 // Function prototypes
 uint16_t medianFilter(uint16_t data[], uint16_t size);
 // Function to process high pass filtered data and perform step counting
-uint8_t processData(uint16_t data[][3], uint16_t size);
+uint8_t processData(uint16_t data[], uint16_t size);
 
 
 // activity flags i.e. walk, run, stand, liedown

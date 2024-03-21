@@ -22,6 +22,8 @@
 #include "Activity-Classifier.h"
 
 
+
+
 // Function to implement a memory-efficient median filter
 uint16_t medianFilter(uint16_t data[], uint16_t size)
 {
@@ -54,48 +56,42 @@ uint16_t medianFilter(uint16_t data[], uint16_t size)
 }
 
 // Function to process high pass filtered data and perform step counting
-uint8_t processData(uint16_t data[][3], uint16_t size)
+void processData(uint16_t data[], uint16_t size, uint8_t* classifierBuffer, uint8_t* bufferIndex, uint8_t bufferLength)
 {
     // Apply median filter to the data
-    uint16_t filteredData[size][3];
+    uint16_t filteredData[size];
     for (uint16_t i = 0; i < size; i++)
     {
-        for (uint16_t j = 0; j < 13; j++)
-        {
-            filteredData[i][j] = medianFilter(data[i], 13);
-        }
+        filteredData[i] = medianFilter(data, size);
     }
 
-    // Calculate the product of magnitude and duration
-    uint32_t product = 0;
-    for (uint16_t i = 0; i < size; i++)
+    for (uint16_t j = 0; j < size; j = j + 25)
     {
-        for (uint16_t j = 0; j < 13; j++)
+        // Calculate the product of magnitude and duration
+        uint32_t product = 0;
+        for (uint16_t i = j; i < j + 25; i++)
         {
-            product += filteredData[i][j];
+            product += filteredData[i];
         }
-    }
 
-    // Define the threshold for step counting
-    uint16_t stepCountThreshold = 2;
-    uint16_t threshold = 1615;
+        // Define the threshold for step counting
+        uint16_t stepCountThreshold = 2;
+        uint16_t threshold = 1615;
 
-    // Check if the product is larger than the threshold
-    if (product > threshold)
-    {
-        // Mark maximal, minimal, and mid points for a window of length 25
-        uint16_t maxPoints = 0;
-        uint16_t minPoints = 0;
-        uint16_t midPoints = 0;
-        for (uint16_t i = 0; i < size; i++)
+        // Check if the product is larger than the threshold
+        if (product > threshold)
         {
-            for (uint16_t j = 0; j < 25; j++)
+            // Mark maximal, minimal, and mid points for a window of length 25
+            uint16_t maxPoints = 0;
+            uint16_t minPoints = 0;
+            uint16_t midPoints = 0;
+            for (uint16_t i = j; i < j + 25; i++)
             {
-                if (filteredData[i][j] > filteredData[i][j + 1] && filteredData[i][j] > filteredData[i][j - 1])
+                if (filteredData[i] > filteredData[i + 1] && filteredData[i] > filteredData[i - 1])
                 {
                     maxPoints++;
                 }
-                else if (filteredData[i][j] < filteredData[i][j + 1] && filteredData[i][j] < filteredData[i][j - 1])
+                else if (filteredData[i] < filteredData[i + 1] && filteredData[i] < filteredData[i - 1])
                 {
                     minPoints++;
                 }
@@ -104,37 +100,34 @@ uint8_t processData(uint16_t data[][3], uint16_t size)
                     midPoints++;
                 }
             }
-        }
 
-        // Count the number of changes from max to min
-        uint16_t stepCount = 0;
-        for (uint16_t i = 0; i < size; i++)
-        {
-            for (uint16_t j = 0; j < 25; j++)
+            // Count the number of changes from max to min
+            uint16_t stepCount = 0;
+            for (uint16_t i = j; i < j + 25; i++)
             {
-                if (filteredData[i][j] > filteredData[i][j + 1] && filteredData[i][j] > filteredData[i][j - 1] &&
-                    filteredData[i][j + 1] < filteredData[i][j + 2] && filteredData[i][j - 1] < filteredData[i][j - 2])
+                if (filteredData[i] > filteredData[i + 1] && filteredData[i] > filteredData[i - 1] &&
+                    filteredData[i + 1] < filteredData[i + 2] && filteredData[i - 1] < filteredData[i - 2])
                 {
                     stepCount++;
                 }
             }
-        }
 
-        // Check if the step count is above the threshold
-        if (stepCount > stepCountThreshold)
-        {
-            // Return the step count
-            return RUN;
+            // Check if the step count is above the threshold
+            if (stepCount > stepCountThreshold)
+            {
+                // Add the classifier to a buffer for every 25 data points
+                addToBuffer8(classifierBuffer, bufferIndex, bufferLength, WALK)
+            }
+            else
+            {
+                // Add the classifier to a buffer for every 25 data points
+                addToBuffer8(classifierBuffer, bufferIndex, bufferLength, RUN)
+            }
         }
         else
         {
-            // Return REST
-            return WALK;
+            // Add the classifier to a buffer for every 25 data points
+            addToBuffer8(classifierBuffer, bufferIndex, bufferLength, REST)
         }
-    }
-    else
-    {
-        // Return REST
-        return REST;
     }
 }
