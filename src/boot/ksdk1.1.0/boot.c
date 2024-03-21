@@ -74,19 +74,16 @@
 	#define WARP_BUILD_ENABLE_FLASH 0
 #endif
 
-#define BUFFER_LENGTH 30 // 10 seconds at 30 Hz
-#define NUM_AXIS 3
+#define BUFFER_LENGTH_ACCEL 200 // 10 seconds at 20 Hz
+#define BUFFER_LENGTH_CLASSIFICATION 100
+#define NUM_AXIS 1
 
-uint16_t accelerationBuffer[BUFFER_LENGTH][NUM_AXIS];
-int bufferIndex = 0;
+uint16_t accelerationBuffer[BUFFER_LENGTH_ACCEL][NUM_AXIS];
+uint8_t		classificationBuffer[BUFFER_LENGTH_CLASSIFICATION];
 
-void addToBuffer(uint16_t x, uint16_t y, uint16_t z) {
-    accelerationBuffer[bufferIndex][0] = x;
-    accelerationBuffer[bufferIndex][1] = y;
-    accelerationBuffer[bufferIndex][2] = z;
-    
-    bufferIndex = (bufferIndex + 1) % BUFFER_LENGTH;
-}
+int bufferIndexAccel = 0;
+
+void addToBuffer(uint16_t x, uint16_t y, uint16_t z);
 
 #include "devMMA8451Q.h"
 
@@ -415,6 +412,14 @@ disableLPUARTpins(void)
 	 *	Disable LPUART CLOCK
 	 */
 	CLOCK_SYS_DisableLpuartClock(0);
+}
+
+void addToBuffer(uint16_t x, uint16_t y, uint16_t z) {
+    accelerationBuffer[bufferIndexAccel][0] = x;
+    accelerationBuffer[bufferIndexAccel][1] = y;
+    accelerationBuffer[bufferIndexAccel][2] = z;
+    
+    bufferIndexAccel = (bufferIndexAccel + 1) % BUFFER_LENGTH_ACCEL;
 }
 
 
@@ -1950,7 +1955,7 @@ main(void)
 
 		// add to buffer
 		addToBuffer(data_x, data_y, data_z);
-	} while (bufferIndex != 0);
+	} while (bufferIndexAccel != 0);
 	
 	while (1)
 	{
@@ -1980,7 +1985,7 @@ main(void)
 		// if the activity is detected, send a message to the user
 		uint8_t activity;
 
-		activity = classifyActivity(accelerationBuffer, BUFFER_LENGTH, 13, 40, 0.1575);
+		activity = processData(accelerationBuffer, 500);
 
 		if (activity == WALK)
 		{
@@ -2040,15 +2045,15 @@ writeAllSensorsToFlash(int menuDelayBetweenEachRun, int loopForever)
 #define BUFFER_LENGTH 300 // 10 seconds at 30 Hz
 #define NUM_AXIS 3
 
-uint16_t accelerationBuffer[BUFFER_LENGTH][NUM_AXIS];
-int bufferIndex = 0;
+uint16_t accelerationBuffer[BUFFER_LENGTH_ACCEL][NUM_AXIS];
+int bufferIndexAccel = 0;
 
 void addToCircularBuffer(uint16_t x, uint16_t y, uint16_t z) {
-    accelerationBuffer[bufferIndex][0] = x;
-    accelerationBuffer[bufferIndex][1] = y;
-    accelerationBuffer[bufferIndex][2] = z;
+    accelerationBuffer[bufferIndexAccel][0] = x;
+    accelerationBuffer[bufferIndexAccel][1] = y;
+    accelerationBuffer[bufferIndexAccel][2] = z;
 
-    bufferIndex = (bufferIndex + 1) % BUFFER_LENGTH;
+    bufferIndexAccel = (bufferIndexAccel + 1) % BUFFER_LENGTH_ACCEL;
 }
 	sensorBitField = sensorBitField | kWarpFlashADXL362BitField;
 #endif

@@ -78,6 +78,7 @@ uint8_t processData(uint16_t data[][3], uint16_t size)
 
     // Define the threshold for step counting
     uint16_t stepCountThreshold = 2;
+    uint16_t threshold = 1615;
 
     // Check if the product is larger than the threshold
     if (product > threshold)
@@ -123,12 +124,12 @@ uint8_t processData(uint16_t data[][3], uint16_t size)
         if (stepCount > stepCountThreshold)
         {
             // Return the step count
-            return "STEP";
+            return RUN;
         }
         else
         {
             // Return REST
-            return "REST";
+            return WALK;
         }
     }
     else
